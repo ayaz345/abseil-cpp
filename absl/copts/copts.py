@@ -149,7 +149,7 @@ def GccStyleFilterAndCombine(default_flags, test_flags):
     form '-Wwarning' removed if test_flags contains a flag of the form
     '-Wno-warning'
   """
-  remove = set(["-W" + f[5:] for f in test_flags if f[:5] == "-Wno-"])
+  remove = {f"-W{f[5:]}" for f in test_flags if f[:5] == "-Wno-"}
   return [f for f in default_flags if f not in remove] + test_flags
 
 COPT_VARS = {
